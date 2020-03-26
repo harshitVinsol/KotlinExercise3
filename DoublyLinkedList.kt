@@ -101,6 +101,7 @@ class DoublyLinkedList{
         val newNode= Node(value)
         if(head?.element == target){
             newNode.next= head?.next
+            head?.next?.prev= newNode
             newNode.prev= head
             head?.next= newNode
             length++
@@ -139,6 +140,7 @@ class DoublyLinkedList{
         if(head?.element == target){
             newNode.next= head
             head?.prev= newNode
+            newNode?.prev= null
             head= newNode
             length++
             return true
@@ -167,4 +169,13 @@ class DoublyLinkedList{
         }
         return false
     }
+}
+fun main() {
+    val ll = DoublyLinkedList()
+    ll.insertFirst(1)
+    ll.insertFirst(2)
+    ll.insertFirst(3)
+    ll.insertAfter(3,3)
+    ll.forwardTraverse()
+    ll.backwardTraverse()
 }
