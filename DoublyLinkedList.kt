@@ -89,7 +89,7 @@ class DoublyLinkedList{
         while(h?.next!= null){
             if(h.element== value || h.next?.element== value)
                 return true
-            h= h?.next
+            h= h.next
         }
         return false
     }
@@ -116,7 +116,7 @@ class DoublyLinkedList{
         }
         else{
             var h= head?.next
-            while(h?.next!=tail){
+            while(h?.next!=null){
                 if(h?.element == target){
                     h.next?.prev= newNode
                     newNode.prev= h
@@ -153,7 +153,7 @@ class DoublyLinkedList{
         }
         else{
             var h= head?.next
-            while(h?.next!=tail){
+            while(h?.next!=null){
                 if(h?.element == target){
                     newNode.prev= h.prev
                     newNode.next= h
