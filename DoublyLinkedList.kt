@@ -99,15 +99,8 @@ class DoublyLinkedList{
      */
     fun insertAfter(value: Int, target: Int): Boolean{
         val newNode= Node(value)
-        if(head?.element == target){
-            newNode.next= head?.next
-            head?.next?.prev= newNode
-            newNode.prev= head
-            head?.next= newNode
-            length++
-            return true
-        }
-        else if(tail?.element == target){
+        var h= head
+        if(tail?.element == target){
             newNode.prev= tail
             newNode.next= null
             tail?.next=newNode
@@ -115,18 +108,17 @@ class DoublyLinkedList{
             length++
             return true
         }
-        else{
-            var h= head?.next
-            while(h?.next!=null){
-                if(h?.element == target){
-                    h.next?.prev= newNode
-                    newNode.prev= h
-                    newNode.next= h.next
-                    h.next= newNode
+        else {
+            while (h?.next != null) {
+                if (h?.element == target) {
+                    h.next?.prev = newNode
+                    newNode.prev = h
+                    newNode.next = h.next
+                    h.next = newNode
                     length++
                     return true
                 }
-                h=h?.next
+                h = h?.next
             }
         }
         return false
@@ -137,15 +129,8 @@ class DoublyLinkedList{
      */
     fun insertBefore(value: Int, target: Int): Boolean{
         val newNode= Node(value)
-        if(head?.element == target){
-            newNode.next= head
-            head?.prev= newNode
-            newNode?.prev= null
-            head= newNode
-            length++
-            return true
-        }
-        else if(tail?.element == target){
+        var h= head
+        if(tail?.element == target){
             tail?.prev?.next= newNode
             newNode.prev= tail?.prev
             newNode.next= tail
@@ -153,29 +138,19 @@ class DoublyLinkedList{
             length++
             return true
         }
-        else{
-            var h= head?.next
-            while(h?.next!=null){
-                if(h?.element == target){
-                    newNode.prev= h.prev
-                    newNode.next= h
-                    h.prev?.next= newNode
-                    h.prev= newNode
+        else {
+            while (h?.next != null) {
+                if (h?.element == target) {
+                    newNode.prev = h.prev
+                    newNode.next = h
+                    h.prev?.next = newNode
+                    h.prev = newNode
                     length++
                     return true
                 }
-                h=h?.next
+                h = h?.next
             }
         }
         return false
     }
-}
-fun main() {
-    val ll = DoublyLinkedList()
-    ll.insertFirst(1)
-    ll.insertFirst(2)
-    ll.insertFirst(3)
-    ll.insertAfter(3,3)
-    ll.forwardTraverse()
-    ll.backwardTraverse()
 }
