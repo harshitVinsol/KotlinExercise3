@@ -86,8 +86,8 @@ class DoublyLinkedList{
      */
     fun search(value: Int):Boolean{
         var h= head
-        while(h?.next!= null){
-            if(h.element== value || h.next?.element== value)
+        while(h!= null){
+            if(h.element== value)
                 return true
             h= h.next
         }
@@ -100,26 +100,20 @@ class DoublyLinkedList{
     fun insertAfter(value: Int, target: Int): Boolean{
         val newNode= Node(value)
         var h= head
-        if(tail?.element == target){
-            newNode.prev= tail
-            newNode.next= null
-            tail?.next=newNode
-            tail= newNode
-            length++
-            return true
-        }
-        else {
-            while (h?.next != null) {
-                if (h?.element == target) {
-                    h.next?.prev = newNode
-                    newNode.prev = h
-                    newNode.next = h.next
-                    h.next = newNode
-                    length++
-                    return true
+
+        while (h!= null) {
+            if (h?.element == target) {
+                if(h==tail){
+                    tail= newNode
                 }
-                h = h?.next
+                h.next?.prev = newNode
+                newNode.prev = h
+                newNode.next = h.next
+                h.next = newNode
+                length++
+                return true
             }
+            h = h?.next
         }
         return false
     }
@@ -130,26 +124,20 @@ class DoublyLinkedList{
     fun insertBefore(value: Int, target: Int): Boolean{
         val newNode= Node(value)
         var h= head
-        if(tail?.element == target){
-            tail?.prev?.next= newNode
-            newNode.prev= tail?.prev
-            newNode.next= tail
-            tail?.prev=newNode
-            length++
-            return true
-        }
-        else {
-            while (h?.next != null) {
-                if (h?.element == target) {
-                    newNode.prev = h.prev
-                    newNode.next = h
-                    h.prev?.next = newNode
-                    h.prev = newNode
-                    length++
-                    return true
+
+        while (h!= null) {
+            if (h?.element == target) {
+                if(h==head){
+                    head=newNode
                 }
-                h = h?.next
+                newNode.prev = h.prev
+                newNode.next = h
+                h.prev?.next = newNode
+                h.prev = newNode
+                length++
+                return true
             }
+            h = h?.next
         }
         return false
     }
